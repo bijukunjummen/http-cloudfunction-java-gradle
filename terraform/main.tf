@@ -2,10 +2,13 @@ provider "google" {
   project = var.project
   region  = var.region
 }
-
-data "local_file" "buildJar" {
-  filename = "../build/libs/http-cloudfunction-java-gradle-all.jar"
+data "archive_file" "source" {
+  type        = "zip"
+  source_dir  = "../build/libs"
+  output_path = "/tmp/function.zip"
+  # excludes    = [ "../../../terraform" ]
 }
+
 
 # Create bucket that will host the source code
 resource "google_storage_bucket" "bucket" {
@@ -15,9 +18,9 @@ resource "google_storage_bucket" "bucket" {
 
 # Add source code zip to bucket
 resource "google_storage_bucket_object" "functionGcs" {
-  name   = "http-cloudfunction-java-gradle-all.jar"
+  name   = "http-cloudfunction-java-gradle-all.zip"
   bucket = google_storage_bucket.bucket.name
-  source = data.local_file.buildJar.filename
+  source = data.archive_file.source
 }
 
 # Enable Cloud Functions API
