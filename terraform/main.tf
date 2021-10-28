@@ -1,15 +1,16 @@
 data "local_file" "buildJar" {
-  filename    = "../build/libs/http-cloudfunction-java-gradle-all.jar"
+  filename = "../build/libs/http-cloudfunction-java-gradle-all.jar"
 }
 
 # Create bucket that will host the source code
 resource "google_storage_bucket" "bucket" {
-  name = "${var.project}-function"
+  name                        = "${var.project}-function"
+  uniform_bucket_level_access = true
 }
 
 # Add source code zip to bucket
 resource "google_storage_bucket_object" "functionGcs" {
-  name = "http-cloudfunction-java-gradle-all.jar"
+  name   = "http-cloudfunction-java-gradle-all.jar"
   bucket = google_storage_bucket.bucket.name
   source = data.local_file.buildJar.filename
 }
@@ -37,7 +38,7 @@ resource "google_cloudfunctions_function" "function" {
   name    = var.name
   runtime = "java11"
 
-  available_memory_mb   = 256
+  available_memory_mb = 256
 
   source_archive_bucket = google_storage_bucket.bucket.name
   source_archive_object = google_storage_bucket_object.functionGcs.name
