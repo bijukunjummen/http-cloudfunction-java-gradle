@@ -9,6 +9,7 @@ resource "google_storage_bucket" "bucket" {
 
 # Add source code zip to bucket
 resource "google_storage_bucket_object" "functionGcs" {
+  name = "http-cloudfunction-java-gradle-all.jar"
   bucket = google_storage_bucket.bucket.name
   source = data.local_file.buildJar
 }
