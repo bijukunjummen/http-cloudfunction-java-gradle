@@ -1,5 +1,5 @@
 data "local_file" "buildJar" {
-  filename    = "../build/libs/hello-http-gradle-all.jar"
+  filename    = "../build/libs/http-cloudfunction-java-gradle-all.jar"
 }
 
 # Create bucket that will host the source code
