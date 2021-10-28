@@ -11,7 +11,7 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_object" "functionGcs" {
   name = "http-cloudfunction-java-gradle-all.jar"
   bucket = google_storage_bucket.bucket.name
-  source = data.local_file.buildJar
+  source = data.local_file.buildJar.filename
 }
 
 # Enable Cloud Functions API
