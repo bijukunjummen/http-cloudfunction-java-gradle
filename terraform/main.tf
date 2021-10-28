@@ -6,7 +6,6 @@ data "archive_file" "source" {
   type        = "zip"
   source_dir  = "../build/libs"
   output_path = "/tmp/function.zip"
-  # excludes    = [ "../../../terraform" ]
 }
 
 
@@ -20,7 +19,7 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_object" "functionGcs" {
   name   = "http-cloudfunction-java-gradle-all.zip"
   bucket = google_storage_bucket.bucket.name
-  source = data.archive_file.source
+  source = data.archive_file.source.output_path
 }
 
 # Enable Cloud Functions API
