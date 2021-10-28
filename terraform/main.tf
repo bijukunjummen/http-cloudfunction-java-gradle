@@ -1,3 +1,8 @@
+provider "google" {
+  project = var.project
+  region  = var.region
+}
+
 data "local_file" "buildJar" {
   filename = "../build/libs/http-cloudfunction-java-gradle-all.jar"
 }
