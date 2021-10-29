@@ -21,6 +21,8 @@ public class HelloHttp implements HttpFunction {
     public void service(HttpRequest request, HttpResponse response) throws IOException {
         // Check URL parameters for "name" field
         // "world" is the default value
+        String prefix = System.getenv("message");
+        if (prefix == null) prefix = "Hello";
         String name = request.getFirstQueryParameter("name").orElse("world");
 
         // Parse JSON request and check for "name" field
@@ -40,6 +42,6 @@ public class HelloHttp implements HttpFunction {
         }
 
         var writer = new PrintWriter(response.getWriter());
-        writer.printf("Hello %s!", name);
+        writer.printf("%s %s!", prefix, name);
     }
 }

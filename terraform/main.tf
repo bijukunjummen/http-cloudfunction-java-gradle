@@ -51,6 +51,7 @@ resource "google_cloudfunctions_function" "function" {
   source_archive_object = google_storage_bucket_object.functionGcs.name
   trigger_http          = true
   entry_point           = var.entry_point
+  environment_variables = yamldecode(file("props.yaml"))
 }
 
 # Create IAM entry so all users can invoke the function
