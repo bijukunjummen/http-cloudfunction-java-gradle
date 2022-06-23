@@ -7,6 +7,7 @@ import com.google.cloud.functions.HttpFunction;
 import com.google.cloud.functions.HttpRequest;
 import com.google.cloud.functions.HttpResponse;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -19,7 +20,6 @@ public class HelloHttp implements HttpFunction {
     @Override
     public void service(HttpRequest request, HttpResponse response) throws IOException {
         String name = request.getFirstQueryParameter(NAME_FIELD).orElse(DEFAULT_NAME_VALUE);
-
         JsonNode jsonNode = objectMapper.readTree(request.getReader());
         if (jsonNode != null && jsonNode.has(NAME_FIELD)) {
             name = jsonNode.get(NAME_FIELD).asText();
@@ -29,7 +29,7 @@ public class HelloHttp implements HttpFunction {
                 .put("received", name)
                 .put("payload", String.format("Hello %s", name));
 
-        var writer = response.getWriter();
+        final BufferedWriter writer = response.getWriter();
         response.setContentType("application/json");
         writer.write(objectMapper.writeValueAsString(responseJson));
     }

@@ -23,6 +23,6 @@ gcloud beta functions deploy java-http-function \
 --runtime java17 \
 --trigger-http \
 --entry-point functions.HelloHttp \
---source . \
+--source ./build/libs/ \
 --allow-unauthenticated
 ```
