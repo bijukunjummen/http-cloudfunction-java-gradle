@@ -1,1 +1,8 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+    }
+}
 rootProject.name = 'http-cloudfunction-java-gradle'
+
