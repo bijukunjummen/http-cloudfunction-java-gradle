@@ -1,7 +1,7 @@
 plugins{
   id 'com.github.johnrengelman.shadow' version '7.1.0'
   id 'java'
-  id "io.github.bijukunjummen.cloudfunction" version "0.1.0-SNAPSHOT"
+  id "io.github.bijukunjummen.cloudfunction" version "0.1.0"
 }
 repositories {
   mavenLocal()
