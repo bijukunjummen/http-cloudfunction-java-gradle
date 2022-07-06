@@ -2,7 +2,7 @@
 
 ## Running Locally
 ```shell
-./gradlew runFunction
+./gradlew cloudFunctionInvoker
 ```
 
 ```shell
