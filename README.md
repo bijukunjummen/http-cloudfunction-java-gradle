@@ -18,6 +18,10 @@ curl -v -X "POST" "http://localhost:8080" \
 
 ## Deploying the function
 ```shell
+# Build the uber jar
+./gradlew shadowJar
+
+# Deploy the jar
 gcloud beta functions deploy java-http-function \
 --gen2 \
 --runtime java17 \
