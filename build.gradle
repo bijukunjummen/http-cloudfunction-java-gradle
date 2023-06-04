@@ -1,7 +1,7 @@
 plugins{
   id 'com.github.johnrengelman.shadow' version '7.1.0'
   id 'java'
-  id "io.github.bijukunjummen.cloudfunction" version "0.4.0"
+  id "io.github.bijukunjummen.cloudfunction" version "0.7.0"
 }
 repositories {
   mavenLocal()
@@ -42,6 +42,12 @@ shadowJar {
 cloudFunctionRun {
   target = "functions.HelloHttp"
   port = 8080
+//  debugOptions {
+//    enabled = true
+//    port = 5566
+//    server = true
+//    suspend = false
+//  }
 }
 
 //tasks.register("runFunction", JavaExec) {
